@@ -142,8 +142,8 @@ scores_all_df = pd.concat(scores_list, axis=1, keys=['DNN', 'cardio.', 'emerg.',
 scores_all_df = scores_all_df.swaplevel(0, 1, axis=1)
 scores_all_df = scores_all_df.reindex(level=0, columns=score_fun.keys())
 # Save results
-scores_all_df.to_excel("./outputs2/tables/scores.xlsx", float_format='%.3f')
-scores_all_df.to_csv("./outputs2/tables/scores.csv", float_format='%.3f')
+scores_all_df.to_excel("./outputs/tables/scores.xlsx", float_format='%.3f')
+scores_all_df.to_csv("./outputs/tables/scores.csv", float_format='%.3f')
 
 
 # %% Plot precision recall curves (Figure 2)
@@ -210,7 +210,7 @@ for k, name in enumerate(diagnosis):
     else:
         ax.legend().remove()
     plt.tight_layout()
-    plt.savefig('./outputs2/figures/precision_recall_{0}.pdf'.format(name))
+    plt.savefig('./outputs/figures/precision_recall_{0}.pdf'.format(name))
 
 # %% Confusion matrices (Supplementary Table 1)
 
@@ -228,8 +228,8 @@ confusion_matrices = confusion_matrices.reorder_levels([1, 2, 3, 0], axis=0)
 confusion_matrices = confusion_matrices.unstack()
 confusion_matrices = confusion_matrices.unstack()
 confusion_matrices = confusion_matrices['n']
-confusion_matrices.to_excel("./outputs2/tables/confusion matrices.xlsx", float_format='%.3f')
-confusion_matrices.to_csv("./outputs2/tables/confusion matrices.csv", float_format='%.3f')
+confusion_matrices.to_excel("./outputs/tables/confusion matrices.xlsx", float_format='%.3f')
+confusion_matrices.to_csv("./outputs/tables/confusion matrices.csv", float_format='%.3f')
 
 
 #%% Compute scores and bootstraped version of these scores
@@ -300,10 +300,10 @@ for sf in score_fun:
     else:
         ax.legend().remove()
     plt.tight_layout()
-    plt.savefig('./outputs2/figures/boxplot_bootstrap_{}.pdf'.format(sf))
+    plt.savefig('./outputs/figures/boxplot_bootstrap_{}.pdf'.format(sf))
 
 
-scores_resampled_xr.to_dataframe(name='score').to_csv('./outputs2/figures/boxplot_bootstrap_data.txt')
+scores_resampled_xr.to_dataframe(name='score').to_csv('./outputs/figures/boxplot_bootstrap_data.txt')
 
 #%% McNemar test  (Supplementary Table 3)
 # Get correct and wrong predictions for each of them (cm >= 2 correspond to wrong predictions)
@@ -331,8 +331,8 @@ for i in range(4):
 mcnemar = pd.DataFrame(1-chi2.cdf(mcnemar_score, 1), index=mcnemar_name, columns=diagnosis) # p-value
 
 # Save results
-mcnemar.to_excel("./outputs2/tables/mcnemar.xlsx", float_format='%.3f')
-mcnemar.to_csv("./outputs2/tables/mcnemar.csv", float_format='%.3f')
+mcnemar.to_excel("./outputs/tables/mcnemar.xlsx", float_format='%.3f')
+mcnemar.to_csv("./outputs/tables/mcnemar.csv", float_format='%.3f')
 
 # %% Kappa score classifiers (Supplementary Table 2(a))
 
@@ -369,8 +369,8 @@ for i in range(4):
 kappa = pd.DataFrame(kappa_score, index=kappa_name, columns=diagnosis)  # p-value
 
 # Save results
-kappa.to_excel("./outputs2/tables/kappa.xlsx", float_format='%.3f')
-kappa.to_csv("./outputs2/tables/kappa.csv", float_format='%.3f')
+kappa.to_excel("./outputs/tables/kappa.xlsx", float_format='%.3f')
+kappa.to_csv("./outputs/tables/kappa.csv", float_format='%.3f')
 
 
 # %% Kappa score dataset generation (Supplementary Table 2(b))
