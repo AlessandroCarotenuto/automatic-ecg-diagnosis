@@ -404,8 +404,8 @@ for r1, r2 in combinations(raters, 2):
 
 kappas_annotators_and_DNN = pd.DataFrame(np.stack(kappa_list), columns=diagnosis, index=names_list)
 print(kappas_annotators_and_DNN)
-kappas_annotators_and_DNN.to_excel("./outputs2/tables/kappas_annotators_and_DNN.xlsx", float_format='%.3f')
-kappas_annotators_and_DNN.to_csv("./outputs2/tables/kappas_annotators_and_DNN.csv", float_format='%.3f')
+kappas_annotators_and_DNN.to_excel("./outputs/tables/kappas_annotators_and_DNN.xlsx", float_format='%.3f')
+kappas_annotators_and_DNN.to_csv("./outputs/tables/kappas_annotators_and_DNN.csv", float_format='%.3f')
 
 # %% Compute scores and bootstraped version of these scores on alternative splits
 bootstrap_nsamples = 1000
@@ -480,5 +480,5 @@ plt.legend(fontsize=17)
 plt.ylim([0.4, 1.05])
 plt.xlim([-0.5, 5.5])
 plt.tight_layout()
-plt.savefig('./outputs2/figures/boxplot_bootstrap_other_splits_{0}.pdf'.format(sf))
-f1_score_resampled_df.to_csv('./outputs2/figures/boxplot_bootstrap_other_splits_data.txt', index=False)
+plt.savefig('./outputs/figures/boxplot_bootstrap_other_splits_{0}.pdf'.format(sf))
+f1_score_resampled_df.to_csv('./outputs/figures/boxplot_bootstrap_other_splits_data.txt', index=False)
